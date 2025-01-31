@@ -1,35 +1,15 @@
 pipeline {
     agent any
-    stages {
-        stage('Setup parameters') {
+    parameters {
+        string( name: 'ENVIRONMENT', defaultValue: 'DEV', description: 'Set environment: DEV, TEST, or PROD')
+    }
+    stages{
+        stage('Deploy to production'){
+            when {
+                expression { return params.ENVIRONMENT == 'PROD'}
+            }
             steps {
-                script {
-                    properties ([
-                        parameters ([
-                            choice(
-                                choices: ["ONE", "TWO"],
-                                name: 'PARAMETER_01'
-                            ),
-                            booleanParam(
-                                defaultValue: 'true',
-                                description: 'Run this job',
-                                name: 'BOOLEAN'
-                            ),
-                            text(
-                                defaultValue: '''
-                                This is multi-line
-                                string parameter example
-                                ''',
-                                name: 'MULTI_LINE_STRING'
-                            ),
-                            string(
-                                defaultValue: 'scriptcrunch',
-                                name: 'STRING_PARAMETER',
-                                trim: true
-                            )
-                        ])
-                    ])
-                }
+                bat 'echo Deployed to production'
             }
         }
     }
