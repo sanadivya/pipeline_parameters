@@ -12,7 +12,7 @@ pipeline {
                             ),
                             booleanParam(
                                 defaultValue: 'true',
-                                description: '',
+                                description: 'Run this job',
                                 name: 'BOOLEAN'
                             ),
                             text(
@@ -20,11 +20,11 @@ pipeline {
                                 This is multi-line
                                 string parameter example
                                 ''',
-                                name: 'MULTI-LINE-STRING'
+                                name: 'MULTI_LINE_STRING'
                             ),
                             string(
                                 defaultValue: 'scriptcrunch',
-                                name: 'STRING-PARAMETER',
+                                name: 'STRING_PARAMETER',
                                 trim: true
                             )
                         ])
